@@ -4,5 +4,29 @@
 // but you don't so you're going to write it from scratch:
 
 var stringifyJSON = function(obj) {
-  // your code goes here
+var targetKeys = [];
+var targetValue = [];
+  if (Array.isArray(obj)){
+   return "" + obj
+  }
+  if (typeof obj === 'string'){
+    return "" + obj
+  }
+  if (typeof obj === 'object'){
+   for(var key in obj) {
+      key = "" + key
+    }
+     return obj
+  }
 };
+
+/*
+input: element
+output: element with added quotes
+if typeof obj === 'string'
+return " + obj
+else return back into strin
+
+*/ 
+
+
