@@ -19,22 +19,11 @@ var stringifyJSON = function(obj) {
       return start += ']';
     }
     for (var i = 0; i < obj.length; i++) {
-      if (i === obj.length - 1){
-        if (typeof obj[i] === 'string') {
-          start += '"' + obj[i] + '"';
-        } else {
-          start += obj[i];
-        }    
-      } else {
-        if (typeof obj[i] === 'string') {
-          start += '"' + obj[i] + '"' + ',';
-        } else {
-          start += obj[i] + ',';
-        }
-      }
-    }
-  }
-  return start += ']';     
+       start += stringifyJSON(obj[i]) + ', '; 
+     }
+       start.pop();
+       return start += ']'; 
+    }    
 };
 
 /*
@@ -46,7 +35,21 @@ else return back into strin
 
 
 
-
+//     if (i === obj.length - 1){
+  //       if (typeof obj[i] === 'string') {
+  //         start += '"' + obj[i] + '"';
+  //       } else {
+  //         start += obj[i];
+  //       }    
+  //     } else {
+  //       if (typeof obj[i] === 'string') {
+  //         start += '"' + obj[i] + '"' + ',';
+  //       } else {
+  //         start += obj[i] + ',';
+  //       }
+  //     }
+  //   }
+  // }
 var targetKeys = [];
 var targetValue = [];
   if (Array.isArray(obj)){
