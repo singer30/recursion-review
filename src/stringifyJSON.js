@@ -4,26 +4,33 @@
 // but you don't so you're going to write it from scratch:
 
 var stringifyJSON = function(obj) {
-  if(typeof obj === 'number' || typeof obj === 'boolean'){
+  if(typeof obj === 'number' || typeof obj === 'boolean') {
     return String(obj);
   }
-  if ( obj === null || typeof obj === 'undefined'){
+  if ( obj === null || typeof obj === 'undefined') {
     return "null"; 
   }
-  if (typeof obj === 'string'){
+  if (typeof obj === 'string') {
     return '"' + obj + '"';
   }
-  if(Array.isArray(obj)){
+  if (Array.isArray(obj)) {
     var start = '[';
     if (obj.length === 0) {
-      return start += ']';
+      return "[]";
     }
     for (var i = 0; i < obj.length; i++) {
-       start += stringifyJSON(obj[i]) + ', '; 
-     }
-       start.pop();
-       return start += ']'; 
-    }    
+      start += stringifyJSON(obj[i]) + ','; 
+    }
+    start = start.slice(0, start.length - 1) + ']'
+    return start; 
+  }    
+  if (typeof obj === 'object') {
+    var keyStr;
+    var keyVal;
+    if (obj.length === undefined) {
+      return '{}';
+    }
+  }
 };
 
 /*
