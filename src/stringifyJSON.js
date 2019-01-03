@@ -25,50 +25,25 @@ var stringifyJSON = function(obj) {
     return start; 
   }    
   if (typeof obj === 'object') {
-    var keyStr;
-    var keyVal;
-    if (obj.length === undefined) {
+    var keys = Object.keys(obj)
+    for(var i = 0; i < keys.length; i++){
+     stringifyJSON(keys[i]);
+     }
+    if (keys.length === 0) {
       return '{}';
+    } 
+    for (var key in obj){
+      if(typeof key === 'function'){
+        return '{}';
+      }
     }
+    var start = '{';
+    for (var key in obj){
+     start += '"' + key + '":' + stringifyJSON(obj[key]) + "," 
+    }
+    start = start.slice(0, start.length - 1) + "}"
+    return start; 
   }
+
 };
 
-/*
-input: element
-output: element with added quotes
-if typeof obj === 'string'
-return " + obj
-else return back into strin
-
-
-
-//     if (i === obj.length - 1){
-  //       if (typeof obj[i] === 'string') {
-  //         start += '"' + obj[i] + '"';
-  //       } else {
-  //         start += obj[i];
-  //       }    
-  //     } else {
-  //       if (typeof obj[i] === 'string') {
-  //         start += '"' + obj[i] + '"' + ',';
-  //       } else {
-  //         start += obj[i] + ',';
-  //       }
-  //     }
-  //   }
-  // }
-var targetKeys = [];
-var targetValue = [];
-  if (Array.isArray(obj)){
-   return "" + obj
-  }
-  if (typeof obj === 'string'){
-    return "" + obj
-  }
-  if (typeof obj === 'object'){
-   for(var key in obj) {
-      key = "" + key
-    }
-     return obj
-  }
-*/ 
